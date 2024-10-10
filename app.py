@@ -4,6 +4,7 @@ from bson.objectid import ObjectId
 import jwt
 import datetime
 import bcrypt
+import uuid
 
 app = Flask(__name__)
 
@@ -68,6 +69,8 @@ def login():
         return jsonify({"message": "User not found"}), 401
     if not bcrypt.checkpw(password.encode('utf-8'), user['password']):
         return jsonify({"message": "Incorrect password"}), 401
+    if username in active_sessions.values():
+        return jsonify({"message": "User already logged in"}), 401
     token = jwt.encode({"user": username, "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, JWT_SECRET)
     session_id = str(uuid.uuid4())
     active_sessions[session_id] = username
@@ -82,6 +85,5 @@ def logout():
     else:
         return jsonify({"message": "Not logged in"}), 401
 
-import uuid
 if __name__ == '__main__':
     app.run(debug=True)

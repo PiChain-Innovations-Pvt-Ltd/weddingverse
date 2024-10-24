@@ -1,0 +1,28 @@
+{
+    "Artist Name": "Makeup By Tanjam Chawla",
+    "Artist Location": "Rajouri Garden, Delhi",
+    "Price": "18,000",
+    "Services": {
+        "Airbrush Makeup": "₹23,000",
+        "Bridal Makeup": "₹18,000",
+        "Guest/Family Makeup": "₹5,000"
+    },
+    "Offerings": [
+        "Regular Makeup",
+        "AirBrush Makeup",
+        "Hairstyling",
+        "Draping"
+    ],
+    "Policies": [
+        "30% Payment On Booking",
+        "70% Payment On Date",
+        "Cancellation Policy - No Refund."
+    ],
+    "Other Information": {
+        "Brand Used": "All International Highend Products",
+        "Is Willing To Travel To Venue": "Yes",
+        "Is Willing To Travel Other Indian Cities": "Yes",
+        "Trial Makeup": "Yes (Separately Paid)",
+        "Is Studio Available": "No"
+    }
+}

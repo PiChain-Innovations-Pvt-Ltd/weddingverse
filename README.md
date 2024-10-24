@@ -11,21 +11,20 @@ The project is organized into several key components:
     * `scrape_makeup.py`: Scrapes data for makeup artists.
     * `scrape_planners.py`: Scrapes data for wedding planners.
     * `scrape_venues.py`: Scrapes data for wedding venues.
-    * `scrape_searates.py`: Scrapes sea rates data (purpose unclear without further investigation).
     * `scrape_venue_single_url.py`: Scrapes data from a single venue URL.
 
 * **Utilities:**
     * `utilities/combine_json.py`: Combines JSON files.
     * `utilities/combine_csv.py`: Combines CSV files.
     * `utilities/count_json_objects.py`: Counts objects in JSON files.
-    * `utilities/getUrls.py`: (Purpose unclear without further investigation).
-    * `utilities/splitFile.py`: Splits files.
+    * `utilities/getUrls.py`: It generates URLs for web scraping, given a single XML source.
+    * `utilities/splitFile.py`: Splits files containing URLs for ship tracking.
 
 * **Decorators:**
     * `scrape_decorators.py`: Contains reusable decorators for scraping tasks.
 
 * **Authentication:**
-    * `ssoLogin.py`: Handles authentication (likely using OAuth2).
+    * `ssoLogin.py`: Handles authentication. Contains backend APIs for OAuth2 authentication.
 
 * **Orchestration:**
     * `run_scrape.sh`: A bash script that runs the scraping tasks.
@@ -35,7 +34,9 @@ The project is organized into several key components:
 
 ## Data Flow
 
-1. The `run_scrape.sh` script iterates and runs the `scrape_photographers.py` script multiple times.  (Further investigation needed to determine the exact data flow for other scrapers).
+1. The `run_scrape.sh` script iterates and runs the `scrape_<object>.py` script parallally. It collects all the URLs from a single URL. All the URLs are stored in separate files, number of files and batches are determined on the basis of CPU and RAM of runner machine. On running the script, all 100-200 instances will run concurrently, launching individual browsers in an asynchronous fashion.
+> [!CAUTION]
+> This script will use all of your RAM and CPU, and hang the system if the concurrency is not determined carfefully.
 2. Each scraper retrieves data from target websites.
 3. Data is processed and saved as JSON or CSV files.
 4. Utility scripts combine and process the collected data.
@@ -46,7 +47,4 @@ To run the scraper, execute the `run_scrape.sh` script.  This script will run th
 
 ## Further Development
 
-* Investigate the purpose of `utilities/getUrls.py`.
-* Clarify the data flow for scrapers other than `scrape_photographers.py`.
-* Add more detailed documentation for each script.
-* Implement error handling and logging.
+* Bypassing using proxy and bot blockers
